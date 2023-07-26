@@ -60,7 +60,7 @@ coreFunction:
                 - PATCH
                 - DELETE
         - name: GeographicLocation
-        - id: TMF675
+          id: TMF675
           isRequired: yes
           version: 4.0
           specification: https://raw.githubusercontent.com/tmforum-apis/TMF675_GeographicLocation/master/TMF675-GeographicLocation-v4.0.0.swagger.json

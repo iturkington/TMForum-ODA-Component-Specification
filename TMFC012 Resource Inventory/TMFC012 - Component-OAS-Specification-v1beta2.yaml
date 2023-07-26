@@ -225,8 +225,8 @@ coreFunction:
       port: 8080
       resources:
       - permission:
-       - GET
-       - GET /id
+        - GET
+        - GET /id
     - name: ResourceInventoryManagement
       id: TMF639
       isRequired: yes
@@ -237,12 +237,12 @@ coreFunction:
       developerUI: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/ResourceInventory/v4/docs
       port: 8080
       resources:
-      - resource::
-       - GET
-       - GET /id       
-       - POST
-       - PATCH
-       - DELETE
+      - resource:
+        - GET
+        - GET /id       
+        - POST
+        - PATCH
+        - DELETE
     - name: Event
       id: TMF688
       isRequired: no

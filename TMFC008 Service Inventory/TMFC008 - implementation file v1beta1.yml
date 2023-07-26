@@ -187,13 +187,13 @@ coreFunction:
         - GET /id  
         - POST                                
     publishedEvents: 
-    - name: ServiceInventoryManagement
-      specification: https://github.com/tmforum-apis/TMF638_ServiceInventoryManagement/blob/master/TMF638_ServiceInventoryManagement-v4.0.0.swagger.json
-      hub: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/serviceInventory/hub
-      implementation: /{{.Release.Name}}-serviceInventoryEvent
-      apitype: openapi
-      port: 80
-      -resources: 
+      - name: ServiceInventoryManagement
+        specification: https://github.com/tmforum-apis/TMF638_ServiceInventoryManagement/blob/master/TMF638_ServiceInventoryManagement-v4.0.0.swagger.json
+        hub: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/serviceInventory/hub
+        implementation: /{{.Release.Name}}-serviceInventoryEvent
+        apitype: openapi
+        port: 80
+      - resources: 
          serviceInventory:
             - serviceCreateEvent
             - serviceAttributeValueChangeEvent
@@ -247,7 +247,7 @@ coreFunction:
       resources:   
       - ServiceCatalog:
         - serviceSpecificationDeleteEvent
-   - name: PartyRoleManagement
+    - name: PartyRoleManagement
       specification: https://open-api.tmforum.org20-PartyRole-v4.0.0.swagger.json
       call-back: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/PartyRole/call-back
       port: 80

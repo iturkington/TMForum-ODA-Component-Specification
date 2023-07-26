@@ -30,11 +30,17 @@ spec:
           developerUI: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/ProcessFlowManagement/v4/docs
           port: 8080
         - name: Event
-	      required: false
-          specification: https://raw.githubusercontent.com/tmforum-apis/TMF688-Event/master/TMF688-Event-v4.0.0.swagger.json
-          implementation: /{{.Release.Name}}-Event
-          path: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/Event/v4
-          developerUI: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/Event/v4/docs
+          id: TMF688
+          isRequired: not
+          version: 4
+          specification: >-
+            https://raw.githubusercontent.com/tmforum-apis/TMF671_Promotion/master/TMF671-Promotion-v4.0.0.swagger.json
+          implementation: '/{{.Release.Name}}-PromotionManagement'
+          apitype: openapi
+          path: >-
+            /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/PromotionManagement/v4
+          developerUI: >-
+            /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/PromotionManagement/v4/docs
           port: 8080
     dependentAPIs:
         - name: PartyManagement

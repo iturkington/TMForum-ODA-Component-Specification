@@ -1,8 +1,8 @@
 apiVersion: oda.tmforum.org/v1beta1
 kind: component
 metadata:
-  - name: TMFC020-agreementManagement
-    labels: null
+  name: TMFC020-agreementManagement
+  labels: 
     oda.tmforum.org/componentName: TMFC020-agreementManagement
     oda.tmforum.org/funtionalBlockName: PartyManagement
 spec:

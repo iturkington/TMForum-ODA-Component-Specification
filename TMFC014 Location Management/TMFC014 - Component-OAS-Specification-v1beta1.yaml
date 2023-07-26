@@ -60,7 +60,7 @@ coreFunction:
                 - PATCH
                 - DELETE
         - name: GeographicLocation
-        - id: TMF675
+          id: TMF675
           isRequired: yes
           version: 4.0
           specification: https://raw.githubusercontent.com/tmforum-apis/TMF675_GeographicLocation/master/TMF675-GeographicLocation-v4.0.0.swagger.json
@@ -161,6 +161,7 @@ coreFunction:
           - geographicAddressValidation:
             - geographicAddressValidationStateChangeEvent
         - name: GeographicSiteManagement
+          id: TMF674
           specification: https://raw.githubusercontent.com/tmforum-apis/TMF674_GeographicSite/master/TMF674-GeographicSite-v4.0.0.swagger.json
           hub: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/GeographicSiteManagement/hub
           implementation: /{{.Release.Name}}-GeographicSiteManagementEvent
@@ -173,6 +174,7 @@ coreFunction:
                 - geographicSiteStatusChangeEvent
         - name: GeographicLocation
           specification: https://raw.githubusercontent.com/tmforum-apis/TMF675_GeographicLocation/master/TMF675-GeographicLocation-v4.0.0.swagger.json
+          id: TMF675
           hub: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/GeographicLocation/hub
           implementation: /{{.Release.Name}}-GeographicLocationEvent
           apitype: openapi

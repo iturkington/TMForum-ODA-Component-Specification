@@ -1,10 +1,10 @@
 apiVersion: oda.tmforum.org/v1alpha1
 kind: component
 metadata:
+  name: TAG_REALESE_NAME - Digital Identity Management
   labels:
     oda.tmforum.org/componentName: Digital Identity Management
     oda.tmforum.org/funtionalBlockName: Party Management
-    name: TAG_REALESE_NAME - Digital Identity Management
 spec:
   componentKinds:
     - group: core
