@@ -1,12 +1,12 @@
 apiVersion: oda.tmforum.org/v1beta1
 kind: component
 metadata:
-  name: TMFC005-productinventory
+  name: TMFC008-serviceInventory
   labels:
-    oda.tmforum.org/componentName: TMFC005-productinventory
-    oda.tmforum.org/funtionalBlockName: CoreCommerce
+    oda.tmforum.org/componentName: TMFC008-serviceInventory
+    oda.tmforum.org/funtionalBlockName: Production
 spec:
-  type: TMFC005-productinventory
+  type: TMFC008-serviceInventory
   version: 1.1.0
   description: "Simple Product Inventory ODA-Component from Open-API reference implementation." 
   maintainers:
@@ -17,18 +17,18 @@ spec:
     email: gaetano.biancardi@accenture.com
 coreFunction:
     exposedAPIs:
-    - name: productinventory
-      id: TMF637
+    - name: serviceInventory
+      id: TMF638
       isRequired: yes
       version: 4.0
-      specification: https://raw.githubusercontent.com/tmforum-apis/TMF637_ProductInventory/master/TMF637-ProductInventory-v4.0.0.swagger.json
+      specification: https://raw.githubusercontent.com/tmforum-apis/serviceInventory/master/TMF638-serviceInventory-v4.0.0.swagger.json
       implementation: /{{.Release.Name}}-prodinvapi
       apitype: openapi
-      path: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/productinventory/v4
-      developerUI: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/productinventory/v4/docs
+      path: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/serviceInventory/v4
+      developerUI: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/serviceInventory/v4/docs
       port: 8080
-      resouces:
-        - product:
+      resources:
+        - service:
           - GET
           - GET /id
           - POST
@@ -64,7 +64,7 @@ coreFunction:
       path: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/EventManagement/v4
       developerUI: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/EventManagement/v4/docs
       port: 8080
-      resouces: 
+      resources: 
       - event:  
         - GET
         - GET /id
@@ -72,22 +72,16 @@ coreFunction:
         - PATCH
         - DELETE
     dependantAPIs:
-    - name: ProductCatalogManagement 
-      id: TMF620
+    - name: ServiceCatalogManagement 
+      id: TMF633
       isRequired: yes
       version: 4.0
-      specification: https://raw.githubusercontent.com/tmforum-apis/TMF620_ProducCatalogManagement/master/TMF637-ProducCatalogManagement-v4.0.0.swagger.json
+      specification: https://raw.githubusercontent.com/tmforum-apis/TMF633_ServiceCatalogManagement/master/TMF633_ServiceCatalogManagement-v4.0.0.swagger.json
       apitype: openapi     
       resources: 
-      - productSpecification:
+      - serviceSpecification:
         - GET
         - GET /id 
-      - productOffering:
-        - GET
-        - GET /id
-      - productOfferingPrice:
-        - GET
-        - GET /id
     - name: PartyRoleManagement
       id: TMF669
       isRequired: not
@@ -95,30 +89,27 @@ coreFunction:
       specification: https://raw.githubusercontent.com/tmforum-apis/TMF669_PartyRole/master/TMF669-PartyRole-v4.0.0.swagger.json
       apitype: openapi
       resources:  
-      - PartyRoleManagement:
+      - PartyRole:
         - GET
         - GET /id
-    - name: ResourceInventory
+    - name: ResourceInventoryManagement
       id: TMF639
       isRequired: not
       version: 4.0
       specification: https://raw.githubusercontent.com/tmforum-apis/TMF639-ResourceInventory/master/TMF639-ResourceInventory-v4.0.0.swagger.json
       apitype: openapi
       resource:
-      - resourceSpecification:
+      - resource:
         - GET
         - GET /id
-    - name: AgreementManagement
-      id: TMF651
+    - name: ServiceInventoryManagement
+      id: TMF638
       isRequired: not
       version: 4.0
-      specification: https://github.com/tmforum-apis/TMF651_AgreementManagement/blob/master/TMF651-Agreement-v4.0.0.swagger.json
+      specification: https://raw.githubusercontent.com/tmforum-apis/TMF638-ServiceInventory/master/TMF638-ServiceInventory-v4.0.0.swagger.json
       apitype: openapi
-      resources: 
-      - agreement:
-        - GET
-        - GET /id
-      - agreementSpecification:
+      resource:
+      - service:
         - GET
         - GET /id
     - name: GeographicAddressManagement
@@ -128,6 +119,9 @@ coreFunction:
       apitype: openapi
       resources:
       - geographicAddress:
+        - GET
+        - GET /id
+      - geographicSubAddress:
         - GET
         - GET /id
     - name: GeographicSiteManagement
@@ -158,14 +152,14 @@ coreFunction:
       - permission:
         - GET
         - GET /id
-    - name: AccountManagement 
-      id: TMF666
+    - name: ServiceOrdering 
+      id: TMF641
       isRequired: not
       version: 4.0
-      specification: https://github.com/tmforum-apis/TMF666_AccountManagement/blob/master/TMF666_AccountManagement-v4.0.0.swagger.json     
+      specification: https://github.com/tmforum-apis/TMF641_ServiceOrdering/blob/master/TMF641_ServiceOrdering-v4.0.0.swagger.json     
       apitype: openapi     
       resources: 
-      - billingAccount:
+      - serviceOrder:
         - GET
         - GET /id 
     - name: PartyManagement 
@@ -181,39 +175,6 @@ coreFunction:
       - organization:
         - GET
         - GET /id      
-    - name: ProductInventory 
-      id: TMF637
-      isRequired: not
-      version: 4.0
-      specification: https://github.com/tmforum-apis/TMF637_ProducInventory/blob/master/TMF637-ProducInventory-v4.0.0.swagger.json     
-      apitype: openapi     
-      resources:
-      - product: 
-        - GET
-        - GET /id
-        - POST
-        - PATCH
-        - DELETE
-    - name: ServiceInventory 
-      id: TMF638
-      isRequired: not
-      version: 4.0
-      specification: https://github.com/tmforum-apis/TMF638_ServiceInventory/blob/master/TMF638_ServiceInventory-v4.0.0.swagger.json     
-      apitype: openapi     
-      resources:
-      - service: 
-        - GET
-        - GET /id
-    - name: ProductOrdering 
-      id: TMF622
-      isRequired: not
-      version: 4.0
-      specification: https://github.com/tmforum-apis/TMF622_ProductOrdering/blob/master/TMF622_ProductOrdering-v4.0.0.swagger.json     
-      apitype: openapi     
-      resources:
-      - productOrder: 
-        - GET
-        - GET /id 
     - name: Event 
       id: TMF688
       isRequired: not
@@ -226,19 +187,18 @@ coreFunction:
         - GET /id  
         - POST                                
     publishedEvents: 
-    - name: Productinventory
-      specification: https://github.com/tmforum-apis/TMF637_ProducInventory/blob/master/TMF637-ProducInventory-v4.0.0.swagger.json
-      hub: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/productinventory/hub
-      implementation: /{{.Release.Name}}-ProductinventoryEvent
+    - name: ServiceInventoryManagement
+      specification: https://github.com/tmforum-apis/TMF638_ServiceInventoryManagement/blob/master/TMF638_ServiceInventoryManagement-v4.0.0.swagger.json
+      hub: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/serviceInventory/hub
+      implementation: /{{.Release.Name}}-serviceInventoryEvent
       apitype: openapi
       port: 80
       -resources: 
-         Productinventory:
-             - productCreateEvent
-             - productAttributeValueChangeEvent
-             - productStateChangeEvent
-             - productDeleteEvent
-             - productBatchEvent 
+         serviceInventory:
+            - serviceCreateEvent
+            - serviceAttributeValueChangeEvent
+            - serviceStateChangeEvent
+            - serviceDeleteEvent
     - name: ProcessFlowManagement
       specification: https://github.com/tmforum-apis/TMF701_ProcessFlow/blob/master/TMF701-ProcessFlow-v4.0.0.swagger.json
       hub: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/ProcessFlowManagement/hub
@@ -246,7 +206,7 @@ coreFunction:
       apitype: openapi
       port: 80
       -resources: 
-        ProcessFlow:
+        ProcessFlowManagement:
           - processFlowCreateEvent
           - processFlowStateChangeEvent
           - processFlowStateDeleteEvent
@@ -274,18 +234,19 @@ coreFunction:
       apitype: openapi
       resources:   
       - ServiceInventory:
-        - serviceDeleteEvent
-    - name: ProductCatalogManagement
-      specification: https://open-api.tmforum.org20-ProductCatalog-v4.0.0.swagger.json
-      call-back: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/ProductCatalog/call-back
+          - serviceCreateEvent
+          - serviceAttributeValueChangeEvent
+          - serviceStateChangeEvent
+          - serviceDeleteEvent
+    - name: ServiceCatalogManagement
+      specification: https://open-api.tmforum.org20-ServiceCatalog-v4.0.0.swagger.json
+      call-back: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/ServiceCatalog/call-back
       port: 80
-      implementation: /{{.Release.Name}}-ProductCatalogManagement
+      implementation: /{{.Release.Name}}-ServiceCatalogManagement
       apitype: openapi
       resources:   
-      - ProductCatalog:
-        - productSpecificationDeleteEvent
-        - productOfferingDeleteEvent
-        - productOfferingPriceDeleteEvent
+      - ServiceCatalog:
+        - serviceSpecificationDeleteEvent
     - name: PartyRoleManagement
       specification: https://open-api.tmforum.org20-PartyRole-v4.0.0.swagger.json
       call-back: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/PartyRole/call-back
@@ -295,24 +256,6 @@ coreFunction:
       resources:   
       - PartyRole:
         - partyRoleDeleteEvent
-    - name: AgreementManagement
-      specification: https://open-api.tmforum.org20-Agreement-v4.0.0.swagger.json
-      call-back: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/Agreement/call-back
-      port: 80
-      implementation: /{{.Release.Name}}-AgreementManagement
-      apitype: openapi
-      resources:   
-      - Agreement:
-        - agreementDeleteEvent
-    - name: AccountManagement
-      specification: https://open-api.tmforum.org20-Account-v4.0.0.swagger.json
-      call-back: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/Account/call-back
-      port: 80
-      implementation: /{{.Release.Name}}-AccountManagement
-      apitype: openapi
-      resources:   
-      - Account:
-        - billingAccountDeleteEvent   
     - name: UserRolePermissionManagement
       specification: https://open-api.tmforum.org20-UserRolePermission-v4.0.0.swagger.json
       call-back: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/UserRolePermission/call-back
@@ -350,27 +293,15 @@ coreFunction:
       - Party:
         - individualDeleteEvent
         - organizationDeleteEvent
-    - name: ProductOrderingManagement
-      specification: https://open-api.tmforum.org20-ProductOrdering-v4.0.0.swagger.json
-      call-back: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/ProductOrdering/call-back
+    - name: ServiceOrderingManagement
+      specification: https://open-api.tmforum.org20-ServiceOrdering-v4.0.0.swagger.json
+      call-back: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/ServiceOrdering/call-back
       port: 80
-      implementation: /{{.Release.Name}}-ProductOrderingManagement
+      implementation: /{{.Release.Name}}-ServiceOrderingManagement
       apitype: openapi
       resources:   
-      - ProductOrdering:
-        - productOrderDeleteEvent
-    - name: ProductInventoryManagement
-      specification: https://open-api.tmforum.org20-ProductInventory-v4.0.0.swagger.json
-      call-back: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/ProductInventory/call-back
-      port: 80
-      implementation: /{{.Release.Name}}-ProductInventoryManagement
-      apitype: openapi
-      resources:   
-      - ProductInventory:
-        - productCreateEvent
-        - productDeleteEvent
-        - productAttributeValueChangeEvent
-        - productStateChangeEvent    
+      - ServiceOrdering:
+        - serviceOrderDeleteEvent 
 management: []
 reporting: []
 security: []
