@@ -32,12 +32,34 @@ coreFunction:
         /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/AccountManagement/v4/docs
       port: 8080
       resources:
-        - partyAccount:
-            - GET
-            - GET/id
-            - POST
-            - PATCH/id
-            - DELETE/id
+        - BillingAccount:
+          - GET
+          - GET /id
+          - POST
+          - PATCH /id
+          - DELETE /id
+
+        - BillingCycleSpecification:
+          - GET
+          - GET /id
+          - POST
+          - PATCH /id
+          - DELETE /id
+
+        - BillFormat:
+          - GET
+          - GET /id
+          - POST
+          - PATCH /id
+          - DELETE /id
+
+        - BillPresentationMedia:
+          - GET
+          - GET /id
+          - POST
+          - PATCH /id
+          - DELETE /id
+
     - name: ProcessFlowManagement
       id: TMF701
       isRequired: no
@@ -54,13 +76,14 @@ coreFunction:
       resources:
         - processFlow:
             - GET
-            - GET/id
+            - GET /id
             - POST
-            - DELETE/id
+            - DELETE /id
         - taskFlow:
             - GET
-            - GET/id
-            - PATCH/id
+            - GET /id
+            - PATCH /id
+
     - name: Event
       id: TMF688
       isRequired: no
@@ -75,12 +98,11 @@ coreFunction:
         /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/PromotionManagement/v4/docs
       port: 8080
       resources:
-        - event:
-            - GET
-            - GET /id
-            - POST
-            - PATCH
-            - DELETE
+        - listener:
+          - POST
+        - hub:
+          - POST
+          - DELETE /id
   dependantAPIs:
     - name: PartyManagement
       id: TMF632
@@ -91,11 +113,11 @@ coreFunction:
       apitype: openapi
       resources:
         - individual:
-            - GET
-            - GET/id
+          - GET
+          - GET /id
         - organization:
-            - GET
-            - GET/id
+          - GET
+          - GET /id
     - name: PartyRoleManagement
       id: TMF669
       isRequired: yes
@@ -104,10 +126,10 @@ coreFunction:
         https://github.com/tmforum-apis/TMF669-PartyRoleManagement/blob/master/TMF669-PartyRoleManagement-v4.0.0.swagger.json
       apitype: openapi
       resources:
-        - partyRole:
+        - PartyRole:
             - GET
             - GET /id
-    - name: UserRolePermission
+    - name: UserRolePermissionManagement
       id: TMF672
       isRequired: yes
       version: 4.0
@@ -132,23 +154,30 @@ coreFunction:
         - paymentMethod:
             - GET
             - GET /id
+    - name: PaymentManagement
+      id: TMF676
+      isRequired: yes
+      version: 4.0
+      specification: >-
+       https://github.com/tmforum-apis/TMF676_PaymentManagement/blob/master/TMF676-Payment-v4.0.0.swagger.json
+      apitype: openapi
+      resources:
+        - payment:
+          - GET
+          - GET /id
     - name: ProcessFlowManagement
       id: TMF701
       isRequired: no
       version: 4.0
       specification: >-
-        ttps://raw.githubusercontent.com/tmforum-apis/TMF701_ProcessFlow/master/TMF701-ProcessFlow-v4.0.0.swagger.json
+        https://raw.githubusercontent.com/tmforum-apis/TMF701_ProcessFlow/master/TMF701-ProcessFlow-v4.0.0.swagger.json
       apitype: openapi
       resources:
         - processFlow:
             - POST
             - GET
             - GET /id
-            - DELETE
-        - taskFlow:
             - PATCH
-            - GET
-            - GET /id
     - name: Event
       id: TMF688
       isRequired: no
@@ -168,9 +197,7 @@ coreFunction:
       apitype: openapi
       port: 80
       resources:
-        Account:
-        - partyAccountAttributeValueChangeEvent
-        - partyAccountStateChangeEvent
+        AccountManagement:
         - billingAccountAttributeValueChangeEvent
         - billingAccountStateChangeEvent
   subscribedEvents:
@@ -180,24 +207,24 @@ coreFunction:
       apitype: openapi
       port: 80
       resources:
-        partyRole
         - partyRoleCreateEvent
         - partyRoleAttributeValueChangeEvent
         - partyRoleStateChangeEvent
         - partyRoleDeleteEvent
-        - UserRoleChangeNotification
-    - name: UserRoleandPermission
+    - name: UserRolePermissionManagement
       specification: >-
-        https://github.com/tmforum-apis/TMF672-UserRoleandPermission/blob/master/TMF672-UserRoleandPermission-v4.0.0.swagger.json
+        https://github.com/tmforum-apis/TMF672-UserRolePermission/blob/master/TMF672-UserRoleandPermission-v4.0.0.swagger.json
       apitype: openapi
       port: 80
       resources:
-        partyRole
-        - partyRoleCreateEvent
-        - partyRoleAttributeValueChangeEvent
-        - partyRoleStateChangeEvent
-        - partyRoleDeleteEvent
-        - UserRoleChangeNotification
-management: []
-reporting: []
-security: []
+        - permissionCreateEvent
+        - permissionAttributeValueChangeEvent
+        - permissionStateChangeEvent
+        - permissionDeleteEvent
+        - userRoleCreateEvent
+        - userRoleAttributeValueChangeEvent
+        - userRoleStateChangeEvent
+        - userRoleDeleteEvent
+managementFunction: []
+reportingFunction: []
+securityFunction: []
