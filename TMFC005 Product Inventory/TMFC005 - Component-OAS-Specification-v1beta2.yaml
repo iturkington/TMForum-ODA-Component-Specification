@@ -7,7 +7,7 @@ spec:
   componentName: ProductInventory
   componentFunctionalBlock: CoreCommerceManagement 
   componenentDescription: "Product  Inventory component is responsible for storage and exposure of products that are assigned to and used by Parties. Product Inventory component has functionality that enables inventory items creation, inventory organization, inventory search or filter, inventory monitoring and tracking, inventory control and inventory auditing. The minimum check to be performed at inventory items creation or update is the global consistency with related Product Catalog information."
-  componentVersion: 1.1.0
+  componentVersion: 1.1.1
   componentStatus: specified 
   componentPublicationDate: 2023-08-18 
   maintainers:
@@ -28,7 +28,7 @@ coreFunction:
       path: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/productinventory/v4
       developerUI: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/productinventory/v4/docs
       port: 8080
-      resouces:
+      resources:
         - product:
           - GET
           - GET /id
@@ -65,12 +65,11 @@ coreFunction:
       path: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/EventManagement/v4
       developerUI: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/EventManagement/v4/docs
       port: 8080
-      resouces: 
-      - event:  
-        - GET
-        - GET /id
+      resources:  
+      - listener:  
         - POST
-        - PATCH
+      - hub:  
+        - POST
         - DELETE
     dependantAPIs:
     - name: ProductCatalogManagement 
@@ -106,7 +105,7 @@ coreFunction:
       specification: https://raw.githubusercontent.com/tmforum-apis/TMF639-ResourceInventory/master/TMF639-ResourceInventory-v4.0.0.swagger.json
       apitype: openapi
       resource:
-      - resourceSpecification:
+      - resource:
         - GET
         - GET /id
     - name: AgreementManagement
@@ -119,21 +118,23 @@ coreFunction:
       - agreement:
         - GET
         - GET /id
-      - agreementSpecification:
-        - GET
-        - GET /id
     - name: GeographicAddressManagement
       version: 4.0
       id : TMF673
+      isRequired: no
       specification: https://github.com/tmforum-apis/TMF673_GeographicAddress/blob/master/TMF673-GeographicAddress-v4.0.1.swagger.json
       apitype: openapi
       resources:
       - geographicAddress:
         - GET
         - GET /id
+      - geographicSubAddress:
+        - GET
+        - GET /id        
     - name: GeographicSiteManagement
       id: TMF674
       version: 4.0
+      isRequired: no
       specification: https://github.com/tmforum-apis/TMF674_GeographicSite/blob/master/TMF674-GeographicSite-v4.0.0.swagger.json
       apitype: openapi
       resources:
@@ -142,6 +143,7 @@ coreFunction:
         - GET /id
     - name: GeographicLocation
       id: TMF675
+      isRequired: no
       version: 4.0
       specification:  https://github.com/tmforum-apis/TMF675_GeographicLocation/blob/master/TMF675-GeographicLocation-v4.0.0.swagger.json
       apitype: openapi
@@ -372,6 +374,6 @@ coreFunction:
         - productDeleteEvent
         - productAttributeValueChangeEvent
         - productStateChangeEvent    
-management: []
-reporting: []
-security: []
+managementFunction: []
+reportingFunction: []
+securityFunction: []
