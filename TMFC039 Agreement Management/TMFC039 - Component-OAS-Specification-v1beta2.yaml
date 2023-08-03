@@ -57,16 +57,16 @@ coreFunction:
       developerUI: >-
         /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/ProcessFlowManagement/v4/docs
       port: 8080
-      resources: null
-      processFlow:
-        - POST
-        - GET
-        - GET /id
-        - DELETE
-      taskFlow:
-        - PATCH
-        - GET
-        - GET /id
+      resources:
+        - processFlow:
+            - POST
+            - GET
+            - GET /id
+            - DELETE
+        - taskFlow:
+            - PATCH
+            - GET
+            - GET /id
     - name: Event
       id: TMF688
       isRequired: no
@@ -81,12 +81,12 @@ coreFunction:
         /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/PromotionManagement/v4/docs
       port: 8080
       resources:
-        - event:
-            - GET
-            - GET /id
+        - listener:  
             - POST
-            - PATCH
+        - hub:  
+            - POST
             - DELETE
+
   dependantAPIs:
     - name: PartyManagement
       id: TMF632
@@ -118,7 +118,7 @@ coreFunction:
             - GET/id
     - name: PartyRoleManagement
       id: TMF669
-      isRequired: 'yes'
+      isRequired: 'no'
       version: 4
       specification: >-
         https://raw.githubusercontent.com/tmforum-apis/TMF669_PartyRoleManagement/master/TMF669-PartyRoleManagement-v4.0.0.swagger.json
@@ -168,7 +168,7 @@ coreFunction:
       isRequired: no
       version: 4
       specification: >-
-        ttps://raw.githubusercontent.com/tmforum-apis/TMF701_ProcessFlow/master/TMF701-ProcessFlow-v4.0.0.swagger.json
+        https://raw.githubusercontent.com/tmforum-apis/TMF701_ProcessFlow/master/TMF701-ProcessFlow-v4.0.0.swagger.json
       apitype: openapi
       resources:
         - processFlow:
@@ -212,7 +212,10 @@ coreFunction:
       implementation: '/{{.Release.Name}}-PartyManagement'
       apitype: openapi
       port: 80
-      resources: party - individualDeleteEvent - organizationDeleteEvent
+      resources:
+        party:
+            - individualDeleteEvent 
+            - organizationDeleteEvent
 management: []
 reporting: []
 security: []

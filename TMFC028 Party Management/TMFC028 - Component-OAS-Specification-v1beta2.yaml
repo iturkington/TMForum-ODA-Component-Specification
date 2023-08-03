@@ -7,7 +7,7 @@ spec:
   componentName: PartyManagement
   componentFunctionalBlock: PartyManagement 
   componenentDescription: "Party Management component is responsible for the capture, validation and management of Parties and their Roles. A Party may be an individual or organization that has a relationship with an enterprise. In this context it is responsible for the e2e life cycle of: Individual, Organization. and its related sub-entities:Contact Medium, Currency and tax exemption certificates, Identification, Community"
-  componentVersion: 1.3.0
+  componentVersion: 1.3.1
   componentStatus: specified 
   componentPublicationDate: 2023-08-18
   maintainers:
@@ -95,7 +95,7 @@ coreFunction:
             - GET
             - GET/id
             - PATCH/id
-    - name: Event
+    - name: EventManagement
       id: TMF688
       isRequired: no
       version: 4.0
@@ -109,9 +109,6 @@ coreFunction:
         - event:
             - GET
             - GET /id
-            - POST
-            - PATCH
-            - DELETE
   dependantAPIs:
     - name: UserRolesandPermissions
       id: TMF672
