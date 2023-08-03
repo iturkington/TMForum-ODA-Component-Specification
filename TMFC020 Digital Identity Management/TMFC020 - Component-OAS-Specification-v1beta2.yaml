@@ -7,7 +7,7 @@ spec:
   componentName: DigitalIdentityManagement
   componentFunctionalBlock: PartyManagement 
   componenentDescription: "The Digital Identity Management is responsible for the parties (customers, employees, partners) and resources authentication."
-  componentVersion: 1.1.0
+  componentVersion: 1.1.1
   componentStatus: specified 
   componentPublicationDate: 2023-08-18
   maintainers:
@@ -75,9 +75,6 @@ coreFunction:
         - event:
             - GET
             - GET /id
-            - POST
-            - PATCH
-            - DELETE
   dependantAPIs:
     - name: PartyManagement
       id: TMF632
@@ -148,6 +145,6 @@ coreFunction:
         userRoles
           - UserRoleCreationNotification
           - UserRoleChangeNotification
-management: []
-reporting: []
-security: []
+managementFunction: []
+reportingFunction: []
+securityFunction: []
