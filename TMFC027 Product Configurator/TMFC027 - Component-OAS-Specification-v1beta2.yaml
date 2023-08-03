@@ -18,7 +18,7 @@ spec:
       email: matteo.destino@accenture.com
 coreFunction:
   exposedAPIs:
-    - name: ProductOfferingQualificationManagement
+    - name: ProductOfferingQualification
       id: TMF679
       isRequired: yes
       version: 4.0
@@ -37,30 +37,7 @@ coreFunction:
             - GET/id
             - POST
             - PATCH/id
-            - DELETE/id
-    - name: ProcessFlowManagement
-      id: TMF701
-      isRequired: no
-      version: 4.0
-      specification: >-
-        https://raw.githubusercontent.com/tmforum-apis/TMF701_ProcessFlowManagement/master/TMF701-ProcessFlowManagement-v4.0.0.swagger.json
-      implementation: '/{{.Release.Name}}-procmngttapi'
-      apitype: openapi
-      path: >-
-        /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/ProcessFlowManagement/v4
-      developerUI: >-
-        /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/ProcessFlowManagement/v4/docs
-      port: 8080
-      resources:
-        - processFlow:
-            - GET
-            - GET/id
-            - POST
-            - DELETE/id
-        - taskFlow:
-            - GET
-            - GET/id
-            - PATCH/id
+            - DELETE
     - name: Event
       id: TMF688
       isRequired: no
@@ -75,14 +52,13 @@ coreFunction:
         /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/PromotionManagement/v4/docs
       port: 8080
       resources:
-        - event:
-            - GET
-            - GET /id
+        - listener:
             - POST
-            - PATCH
+        - hub:
+            - POST
             - DELETE
   dependantAPIs:
-    - name: SalesQuoteManagement
+    - name: SalesQuote
       id: TMF648
       isRequired: yes
       version: 4.0
@@ -93,7 +69,7 @@ coreFunction:
         - quote:
             - GET
             - GET/id
-    - name: ShoppingCartManagement
+    - name: ShoppingCart
       id: TMF663
       isRequired: yes
       version: 4.0
@@ -104,7 +80,7 @@ coreFunction:
             - GET
             - GET /id      
     - name: ProductInventoryManagement
-      id: TMF663
+      id: TMF637
       isRequired: yes
       version: 4.0
       specification: https://github.com/tmforum-apis/TMF637-ProductInventoryManagement/blob/master/TMF637-ProductInventoryManagement-v4.0.0.swagger.json
@@ -196,10 +172,10 @@ coreFunction:
             - GET
             - GET /id            
     - name: AppointmentManagement
-      id: TMF645
+      id: TMF646
       isRequired: no
       version: 4.0
-      specification: https://github.com/tmforum-apis/TMF645-AppointmentManagement/blob/master/TMF645-AppointmentManagement-v4.0.0.swagger.json
+      specification: https://raw.githubusercontent.com/tmforum-apis/TMF646_AppointmentManagement/master/TMF646-Appointment-v4.0.0.swagger.json
       apitype: openapi
       resources:
         - appointment:
@@ -245,7 +221,7 @@ coreFunction:
         - partyRole:
             - GET
             - GET /id
-    - name: UserRolesandPermissions
+    - name: UserRolesPermissions
       id: TMF672
       isRequired: no
       version: 4.0
@@ -289,22 +265,6 @@ coreFunction:
       apitype: openapi
       resources:
         - GeographicSite:
-            - GET
-            - GET /id
-    - name: ProcessFlowManagement
-      id: TMF701
-      isRequired: no
-      version: 4.0
-      specification: https://raw.githubusercontent.com/tmforum-apis/TMF701_ProcessFlow/master/TMF701-ProcessFlow-v4.0.0.swagger.json
-      apitype: openapi
-      resources:
-        - processFlow:
-            - POST
-            - GET
-            - GET /id
-            - DELETE
-        - taskFlow:
-            - PATCH
             - GET
             - GET /id
     - name: Event
@@ -352,6 +312,6 @@ coreFunction:
           - ProductSpecificationAttributeValueChangeEvent
           - ProductSpecificationStateChangeEvent
           - ProductSpecificationDeleteEvent  
-management: []
-reporting: []
-security: []
+managementFunction: []
+reportingFunction: []
+securityFunction: []
