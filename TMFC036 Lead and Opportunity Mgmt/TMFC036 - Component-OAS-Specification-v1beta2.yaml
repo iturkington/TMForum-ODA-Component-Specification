@@ -71,13 +71,13 @@ coreFunction:
       path: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/PromotionManagement/v4
       developerUI: /{{.Release.Name}}-{{.Values.component.type}}/tmf-api/PromotionManagement/v4/docs
       port: 8080
-      rerouces: 
-      - event:  
-        - GET
-        - GET /id
-        - POST
-        - PATCH
-        - DELETE
+      resources:
+        - listener:  
+            - POST
+        - hub:  
+            - POST
+            - DELETE
+
     dependantAPIs:
     - name: PartyManagement
       id: TMF632
@@ -87,9 +87,11 @@ coreFunction:
       apitype: openapi
       resources:  
       - individual:
-        - GET    
+        - GET 
+        - GET/id   
       - organization:
-        - GET            
+        - GET
+        - GET/id            
     - name: PartyRoleManagement
       id: TMF669
       isRequired: no
@@ -99,18 +101,20 @@ coreFunction:
       resources:  
       - PartyRoleManagement:
         - GET
+        - GET/id
     - name: ProductCatalogManagement 
       id: TMF620
       isRequired: no
       version: 4.0
       specification: https://github.com/tmforum-apis/TMF620_ProductCatalog/blob/master/TMF620-ProductCatalog-v4.0.0.swagger.json     
       apitype: openapi     
-      resources: 
-      - GET
-      - GET /id
-      - POST
-      - PATCH
-      - DELETE   
+      resources:
+        - productOffering:
+            - GET
+            - GET/id
+        - productOfferingPrice:
+            - GET
+            - GET/id   
     - name: AgreementManagement
       id: TMF651
       isRequired: no
@@ -120,10 +124,10 @@ coreFunction:
       resources: 
       - agreement:
         - GET
-        - GET /id
+        - GET/id
       - agreementSpecification:
         - GET
-        - GET /id
+        - GET/id
     - name: QuoteManagement
       id: TMF648
       isRequired: no
@@ -183,7 +187,6 @@ coreFunction:
           - SalesLeadAttributeValueChangeEvent
           - SalesLeadStateChangeEvent
           - SalesLeadDeleteEvent        
-          - productSpecificationCreate
         SalesOpportunity:
             - SalesOpportunityCreateEvent
             - SalesOpportunityAttributeValueChangeEvent
@@ -201,11 +204,19 @@ coreFunction:
         - processFlowStateChangeEvent
         - processFlowStateDeleteEvent
         - processFlowStateAttributeValueChangeEvent
+        - processFlowSpecificationAttributeValueChangeEvent
+        - processFlowSpecificationCreateEvent
+        - processFlowSpecificationDeleteEvent
+        - processFlowSpecificationStateChangeEvent
         - taskFlowCreateEvent
         - taskFlowStateChangeEvent
         - taskFlowDeleteEvent
         - taskFlowAttributeValueChangeEvent
         - taskFlowInformationRequiredEvent
+        - taskFlowSpecificationAttributeValueChangeEvent
+        - taskFlowSpecificationCreateEvent
+        - taskFlowSpecificationDeleteEvent
+        - taskFlowSpecificationStateChangeEvent
     subscribedEvents:   
     - name: PartyManagement
       specification: https://github.com/tmforum-apis/TMF632_PartyManagement/blob/master/TMF632-Party-v4.0.0.swagger.json
